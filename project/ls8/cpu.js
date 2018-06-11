@@ -71,7 +71,7 @@ class CPU {
 
         // !!! IMPLEMENT ME
 
-        let IR = this.reg[this.pc]
+        const IR;
 
         // Debugging output
         console.log(`${this.PC}: ${IR.toString(2)}`);
