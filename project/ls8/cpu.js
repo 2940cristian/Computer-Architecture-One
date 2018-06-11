@@ -71,7 +71,7 @@ class CPU {
 
         // !!! IMPLEMENT ME
 
-        const IR;
+        const IR = this.ram.read(this.PC)
 
         // Debugging output
         console.log(`${this.PC}: ${IR.toString(2)}`);
@@ -80,6 +80,9 @@ class CPU {
         // needs them.
 
         // !!! IMPLEMENT ME
+        const a = this.ram.read(this.pc + 1);
+        const b = this.ram.read(this.pc + 2);
+
 
         // Execute the instruction. Perform the actions for the instruction as
         // outlined in the LS-8 spec.
