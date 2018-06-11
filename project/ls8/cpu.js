@@ -56,6 +56,7 @@ class CPU {
         switch (op) {
             case 'MUL':
                 // !!! IMPLEMENT ME
+            
                 break;
         }
     }
@@ -80,8 +81,8 @@ class CPU {
         // needs them.
 
         // !!! IMPLEMENT ME
-        const a = this.ram.read(this.pc + 1);
-        const b = this.ram.read(this.pc + 2);
+        const operandA = this.ram.read(this.pc + 1);
+        const operandB = this.ram.read(this.pc + 2);
 
 
         // Execute the instruction. Perform the actions for the instruction as
