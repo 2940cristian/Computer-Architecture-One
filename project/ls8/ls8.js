@@ -1,6 +1,9 @@
 const RAM = require('./ram');
 const CPU = require('./cpu');
 
+
+
+
 /**
  * Load an LS8 program into memory
  *
@@ -9,7 +12,7 @@ const CPU = require('./cpu');
 function loadMemory() {
 
     // Hardcoded program to print the number 8 on the console
-
+        const program = [];
     // const program = [ // print8.ls8
         // "10011001", // LDI R0,8  Store 8 into R0
         // "00000000",
@@ -51,5 +54,3 @@ let cpu = new CPU(ram);
 loadMemory(cpu);
 
 cpu.startClock();
-
-console.log(process.argv)
