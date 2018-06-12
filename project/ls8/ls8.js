@@ -1,7 +1,39 @@
 const RAM = require('./ram');
 const CPU = require('./cpu');
+let program;
 
 
+if(process.argv[2] === "print8.ls8") {
+    program = [
+        "10011001", // LDI R0,8  Store 8 into R0
+        "00000000",
+        "00001000",
+        "01000011", // PRN R0    Print the value in R0
+        "00000000",
+        "00000001"  // HLT       Halt and quit
+    ]
+}
+
+else if(process.argv[2] === "mult.ls8") {
+    program = [
+    "10011001", //LDI R0,8
+    "00000000",
+    "00001000",
+    "10011001", //LDI R1,9
+    "00000001",
+    "00001001",
+    "10101010", //MUL R0,R1 <---
+    "00000000",
+    "00000001",
+    "01000011", //PRN R0
+    "00000000",
+    "00000001" //HLT
+    ]
+}
+
+else {
+    program = []
+}
 
 
 /**
@@ -12,7 +44,11 @@ const CPU = require('./cpu');
 function loadMemory() {
 
     // Hardcoded program to print the number 8 on the console
-        const program = [];
+        program;
+
+        if(program.length < 1) {
+            throw new Error ("\nDid not pass a parameter into the command line \n Ex: node ls8.js mult.ls8 \n \n  ")
+        }
     // const program = [ // print8.ls8
         // "10011001", // LDI R0,8  Store 8 into R0
         // "00000000",
