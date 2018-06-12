@@ -107,7 +107,6 @@ class CPU {
             
             case MUL:
             this.alu("MUL", operandA, operandB);
-            console.log(operandA)
             break;
 
 
