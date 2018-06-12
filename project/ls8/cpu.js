@@ -5,6 +5,10 @@
 /**
  * Class for simulating a simple Computer (CPU & memory)
  */
+
+const LDI = 0b10011001
+
+
 class CPU {
 
     /**
@@ -89,6 +93,12 @@ class CPU {
         // outlined in the LS-8 spec.
 
         // !!! IMPLEMENT ME
+
+        switch (instruction) {
+            case LDI:
+                this.reg[operandA] = operandB;
+            break;
+        }
 
         // Increment the PC register to go to the next instruction. Instructions
         // can be 1, 2, or 3 bytes long. Hint: the high 2 bits of the
