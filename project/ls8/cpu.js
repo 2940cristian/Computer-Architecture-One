@@ -13,7 +13,7 @@ const POP = 0b01001100;
  * Class for simulating a simple Computer (CPU & memory)
  */
 class CPU {
-
+    
     /**
      * Initialize the CPU
      */
@@ -105,18 +105,15 @@ class CPU {
 
             else {
             this.SP--;
-            this.poke(this.SP, operandA  )
-            console.log('lol', this.reg)
+            this.poke(this.SP, this.reg[operandA]);
             }
             break;
 
             case POP: 
-            console.log(this.SP);
+            this.reg[operandA] = this.ram.read(this.SP)
+            this.SP++
             break;
 
-            
-
-            
             case PRN:
                 console.log(this.reg[operandA]);
                 //this.PC += 2;
