@@ -7,6 +7,7 @@ class RAM {
         this.mem.fill(0);
     }
 
+
     /**
      * Write (store) MDR value at address MAR
      */
