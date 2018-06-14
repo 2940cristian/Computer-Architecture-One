@@ -8,6 +8,8 @@ const HLT = 0b00000001;
 const MUL = 0b10101010;
 const PUSH = 0b01001101;
 const SP = 7;
+const CALL = 0b01001000;
+const RET = 0b00001001;
 const POP = 0b01001100;
 
 /**
@@ -93,11 +95,14 @@ class CPU {
         // outlined in the LS-8 spec.
 
         switch(IR) {
+
             case LDI:
                 // Set the value in a register
                 this.reg[operandA] = operandB;
                 //this.PC += 3; // Next instruction
                 break;
+
+        
 
             case PUSH:
             // if(this.SP.length < 1) {
