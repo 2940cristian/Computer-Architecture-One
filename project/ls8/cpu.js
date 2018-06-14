@@ -11,6 +11,7 @@ const SP = 7;
 const CALL = 0b01001000;
 const RET = 0b00001001;
 const POP = 0b01001100;
+const ADD = 0b10101000
 
 /**
  * Class for simulating a simple Computer (CPU & memory)
@@ -69,8 +70,19 @@ class CPU {
                 // !!! IMPLEMENT ME
                 this.reg[regA] *= this.reg[regB];
                 break;
+
+            case "ADD": 
+                this.reg[regA] += this.reg[regB]
+            
         }
     }
+
+
+    // pushValue(v) {
+    //         this.reg[SP]--;
+    //         this.ram.write(this.reg[SP], v)
+    // }
+
 
     /**
      * Advances the CPU one cycle
@@ -96,13 +108,26 @@ class CPU {
 
         switch(IR) {
 
+            case ADD:
+            this.alu("ADD", operandA, operandB);
+            break;
+
             case LDI:
                 // Set the value in a register
                 this.reg[operandA] = operandB;
                 //this.PC += 3; // Next instruction
-                break;
+            break;
 
-        
+            case CALL:
+
+            this.ram.write(this.reg[SP], this.PC + 2);
+            this.PC = this.reg[operandA] - 2    
+
+            break;
+
+            case RET:
+            this.PC = this.ram.read(this.reg[SP]) - 1
+            break;
 
             case PUSH:
             // if(this.SP.length < 1) {
@@ -117,6 +142,8 @@ class CPU {
             this.reg[SP]--;
             this.ram.write(this.reg[SP], this.reg[operandA]);
             break;
+
+
             case POP: 
             // this.reg[operandA] = this.ram.read(this.SP)
             // this.SP++
@@ -138,10 +165,10 @@ class CPU {
             this.alu("MUL", operandA, operandB);
             break;
 
-            case PEEK:
-                console.log(this.ram.read(this.SP));
-                this.PC++;
-            break;
+            // case PEEK:
+            //     console.log(this.ram.read(this.SP));
+            //     this.PC++;
+            // break;
 
             default:
                 console.log("Unknown instruction: " + IR.toString(2));
