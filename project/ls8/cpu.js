@@ -147,9 +147,9 @@ class CPU {
             }
             break;
 
-            case JLT:
-                if(this.L === 1) {
-                    this.PC === this.reg[operandA]
+            case JNE:
+                if(this.E === 0) {
+                    this.PC = this.reg[operandA]
                 }
             break;
 
