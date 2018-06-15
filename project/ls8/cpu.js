@@ -14,9 +14,9 @@ const POP = 0b01001100;
 const ADD = 0b10101000;
 const CMP = 0b10100000; 
 const JMP = 0b01010000; 
-let E = 0;
-let L = 0;
-let G = 0;
+// let E = 0;
+// let L = 0;
+// let G = 0;
 
 /**
  * Class for simulating a simple Computer (CPU & memory)
