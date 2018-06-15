@@ -11,7 +11,8 @@ const SP = 7;
 const CALL = 0b01001000;
 const RET = 0b00001001;
 const POP = 0b01001100;
-const ADD = 0b10101000
+const ADD = 0b10101000;
+const CMP = 0b10100000; 
 let E = 0;
 let L = 0;
 let G = 0;
@@ -91,6 +92,10 @@ class CPU {
             else if(this.reg[regA] < this.reg[regB]) {
                 this.G = 1;
             }
+
+            else {
+             return;
+            }
             
             
         }
@@ -129,6 +134,10 @@ class CPU {
 
             case ADD:
             this.alu("ADD", operandA, operandB);
+            break;
+
+            case CMP: 
+            this.alu("CMP", operandA, operandB)
             break;
 
             case LDI:
