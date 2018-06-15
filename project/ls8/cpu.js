@@ -12,6 +12,9 @@ const CALL = 0b01001000;
 const RET = 0b00001001;
 const POP = 0b01001100;
 const ADD = 0b10101000
+let E = 0;
+let L = 0;
+let G = 0;
 
 /**
  * Class for simulating a simple Computer (CPU & memory)
@@ -72,7 +75,23 @@ class CPU {
                 break;
 
             case "ADD": 
-                this.reg[regA] += this.reg[regB]
+                this.reg[regA] += this.reg[regB];
+                break;
+
+            case "CMP":
+
+            if(this.reg[regA] === this.reg[regB]) {
+                this.E = 1;
+            }
+
+            else if(this.reg[regA] > this.reg[regB]) {
+                this.L = 1;
+            }
+
+            else if(this.reg[regA] < this.reg[regB]) {
+                this.G = 1;
+            }
+            
             
         }
     }
@@ -121,8 +140,7 @@ class CPU {
             case CALL:
 
             this.ram.write(this.reg[SP], this.PC + 2);
-            this.PC = this.reg[operandA] - 2    
-
+            this.PC = this.reg[operandA] - 2
             break;
 
             case RET:
