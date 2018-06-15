@@ -141,11 +141,17 @@ class CPU {
             this.alu("CMP", operandA, operandB)
             break;
 
-            case JEQ: {
-                if(this.L === 1) {
+            case JEQ: 
+                if(this.E === 1) {
                     this.PC = this.reg[operandA]
-                }
             }
+            break;
+
+            case JLT:
+                if(this.L === 1) {
+                    this.PC === this.reg[operandA]
+                }
+            break;
 
             case LDI:
                 // Set the value in a register
