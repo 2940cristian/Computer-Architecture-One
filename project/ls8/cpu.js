@@ -14,6 +14,8 @@ const POP = 0b01001100;
 const ADD = 0b10101000;
 const CMP = 0b10100000; 
 const JMP = 0b01010000; 
+const JEQ = 0b01010001;
+const JNE = 0b01010010;
 // let E = 0;
 // let L = 0;
 // let G = 0;
@@ -34,6 +36,9 @@ class CPU {
         this.reg[SP] = 0xF4;
         this.PC = 0; // Program Counter
         // this.SP = this.reg[this.reg.length -1]
+        this.E = 0;
+        this.L = 0;
+        this.G = 0;
     }
 
     /**
@@ -81,23 +86,10 @@ class CPU {
                 break;
 
             case "CMP":
-
-            if(this.reg[regA] === this.reg[regB]) {
-                this.E = 1;
-            }
-
-            else if(this.reg[regA] < this.reg[regB]) {
-                this.L = 1;
-            }
-
-            else if(this.reg[regA] > this.reg[regB]) {
-                this.G = 1;
-            }
-
-            else {
-             return;
-            }
-            
+            this.reg[regA] === this.reg[regB] ? this.E = 1 : this.E = 0;
+            this.reg[regA] < this.reg[regB] ? this.L = 1 : this.L = 0;
+            this.reg[regA] > this.reg[regB] ? this.G = 1 : this.G = 0;
+            break;
             
         }
     }
@@ -120,7 +112,7 @@ class CPU {
         const IR = this.ram.read(this.PC);
 
         // Debugging output
-        //console.log(`${this.PC}: ${IR.toString(2)}`);
+        // console.log(`${this.PC}: ${IR.toString(2)}`);
 
         // Get the two bytes in memory _after_ the PC in case the instruction
         // needs them.
@@ -144,13 +136,19 @@ class CPU {
             case JEQ: 
                 if(this.E === 1) {
                     this.PC = this.reg[operandA]
-            }
+                } 
+                else this.PC += (IR >> 6) + 1;
+
+
             break;
 
             case JNE:
                 if(this.E === 0) {
                     this.PC = this.reg[operandA]
                 }
+                else this.PC += (IR >> 6) + 1;
+
+
             break;
 
             case LDI:
@@ -211,8 +209,9 @@ class CPU {
         // can be 1, 2, or 3 bytes long. Hint: the high 2 bits of the
         // instruction byte tells you how many bytes follow the instruction byte
         // for any particular instruction.
-        const instLen = (IR >> 6) + 1;
-        this.PC += instLen;
+        if(IR != JEQ && IR != JNE){
+            this.PC += (IR >> 6) + 1;
+        }
     }
 }
 
