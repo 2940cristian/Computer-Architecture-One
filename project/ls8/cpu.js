@@ -13,6 +13,7 @@ const RET = 0b00001001;
 const POP = 0b01001100;
 const ADD = 0b10101000;
 const CMP = 0b10100000; 
+const JMP = 0b01010000; 
 let E = 0;
 let L = 0;
 let G = 0;
@@ -150,6 +151,10 @@ class CPU {
 
             this.ram.write(this.reg[SP], this.PC + 2);
             this.PC = this.reg[operandA] - 2
+            break;
+
+            case JMP:
+            this.PC = this.reg[operandA]
             break;
 
             case RET:
