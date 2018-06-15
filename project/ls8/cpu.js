@@ -141,6 +141,12 @@ class CPU {
             this.alu("CMP", operandA, operandB)
             break;
 
+            case JEQ: {
+                if(this.E === 1) {
+                    this.PC = this.reg[operandA]
+                }
+            }
+
             case LDI:
                 // Set the value in a register
                 this.reg[operandA] = operandB;
@@ -148,7 +154,6 @@ class CPU {
             break;
 
             case CALL:
-
             this.ram.write(this.reg[SP], this.PC + 2);
             this.PC = this.reg[operandA] - 2
             break;
@@ -162,14 +167,6 @@ class CPU {
             break;
 
             case PUSH:
-            // if(this.SP.length < 1) {
-            //     this.poke(this.SP, 0xf4)
-            // }
-
-            // else {
-            // this.SP--;
-            // this.poke(this.SP, this.reg[operandA]);
-            // }
 
             this.reg[SP]--;
             this.ram.write(this.reg[SP], this.reg[operandA]);
@@ -177,20 +174,16 @@ class CPU {
 
 
             case POP: 
-            // this.reg[operandA] = this.ram.read(this.SP)
-            // this.SP++
             this.reg[operandA] = this.ram.read(this.reg[SP]);
             this.reg[SP]++;
             break;
 
             case PRN:
                 console.log(this.reg[operandA]);
-                //this.PC += 2;
                 break;
 
             case HLT:
                 this.stopClock();
-                //this.PC += 1;
                 break;
             
             case MUL:
