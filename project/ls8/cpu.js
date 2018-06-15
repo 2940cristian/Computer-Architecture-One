@@ -86,11 +86,11 @@ class CPU {
                 this.E = 1;
             }
 
-            else if(this.reg[regA] > this.reg[regB]) {
+            else if(this.reg[regA] < this.reg[regB]) {
                 this.L = 1;
             }
 
-            else if(this.reg[regA] < this.reg[regB]) {
+            else if(this.reg[regA] > this.reg[regB]) {
                 this.G = 1;
             }
 
@@ -142,7 +142,7 @@ class CPU {
             break;
 
             case JEQ: {
-                if(this.E === 1) {
+                if(this.L === 1) {
                     this.PC = this.reg[operandA]
                 }
             }
